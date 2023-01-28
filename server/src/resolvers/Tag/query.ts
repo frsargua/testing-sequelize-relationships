@@ -1,7 +1,7 @@
-const db = require("../../models/index");
+const { Tag, Tutorial, Book } = require("../../models/index");
 import { GraphQLError } from "graphql";
-const Tag = db.tag;
-const Tutorial = db.tutorial;
+// const Tag = db.tag;
+// const Tutorial = db.tutorial;
 
 export const tag = async (_: any, { tagId }: any) => {
   try {
@@ -15,6 +15,7 @@ export const tag = async (_: any, { tagId }: any) => {
             attributes: [],
           },
         },
+        Book,
       ],
     });
 

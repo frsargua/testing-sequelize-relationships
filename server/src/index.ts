@@ -8,8 +8,8 @@ import cors from "cors";
 import { json } from "body-parser";
 import { typeDefs } from "./typeDefs/index";
 import { resolvers } from "./resolvers/index";
-// import sequelize from "./config/db";
-import db from "./models/index";
+import sequelize from "./config/db";
+// import db from "./models/index";
 const { authMiddleware } = require("./context/auth");
 
 interface MyContext {
@@ -31,7 +31,7 @@ const server = new ApolloServer<MyContext>({
 
 const init = async (): Promise<void> => {
   try {
-    await db.sequelize.sync({ force: false });
+    await sequelize.sync({ force: false });
     await server.start();
 
     app.use(

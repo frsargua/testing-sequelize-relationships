@@ -6,9 +6,12 @@ import {
   Model,
 } from "sequelize";
 
-class Tag extends Model<InferAttributes<Tag>, InferCreationAttributes<Tag>> {}
+class Book extends Model<
+  InferAttributes<Book>,
+  InferCreationAttributes<Book>
+> {}
 
-Tag.init(
+Book.init(
   {
     name: {
       type: DataTypes.STRING,
@@ -19,8 +22,8 @@ Tag.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "tag",
+    modelName: "book",
   }
 );
 
-module.exports = Tag;
+module.exports = Book;

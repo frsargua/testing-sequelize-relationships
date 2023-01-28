@@ -11,9 +11,18 @@ type Tutorial{
   title: String
 }
 
+type Book{
+  name: String
+}
+
 type Tag{
   name: String
   tutorials:[Tutorial]
+  books:[Book]
+}
+
+input CreateBookInput{
+  name: String
 }
 
 input CreateTagInput{
@@ -27,6 +36,7 @@ input CreateTutorialInput{
 input TagInputData {
   tutorialInput:CreateTutorialInput
   tagInput:CreateTagInput
+  bookInput:CreateBookInput
 }
   type Mutation {
     createTag(input: TagInputData!): Tag

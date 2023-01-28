@@ -1,25 +1,21 @@
-const Sequelize = require("sequelize");
-import sequelize from "../config/db";
-const db: any = {};
+let Tutorial = require("./tutorial.model.ts");
+let Tag = require("./tag.model.ts");
+let Book = require("./book.model.ts");
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
+Tag.hasMany(Book, {
+  foreignKey: "tag_id",
+});
+Book.belongsTo(Tag, { foreignKey: "tag_id" });
 
-db.tutorial = require("./tutorial.model.ts")(sequelize, Sequelize);
-db.tag = require("./tag.model.ts")(sequelize, Sequelize);
-
-db.tutorial = require("./tutorial.model.ts")(sequelize, Sequelize);
-db.tag = require("./tag.model.ts")(sequelize, Sequelize);
-
-db.tag.belongsToMany(db.tutorial, {
+Tag.belongsToMany(Tutorial, {
   through: "tutorial_tag",
   as: "tutorials",
   foreignKey: "tag_id",
 });
-db.tutorial.belongsToMany(db.tag, {
+Tutorial.belongsToMany(Tag, {
   through: "tutorial_tag",
   as: "tags",
   foreignKey: "tutorial_id",
 });
 
-module.exports = db;
+module.exports = { Tutorial, Tag, Book };
